@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Casino</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
@@ -25,11 +25,11 @@
     <script>
       const hideFullScreenButton = "true";
       const buildUrl = "Build";
-      const loaderUrl = buildUrl + "/NFT_Build.loader.js";
+      const loaderUrl = buildUrl + "/WebGlBuild.loader.js";
       const config = {
-        dataUrl: buildUrl + "/NFT_Build.data",
-        frameworkUrl: buildUrl + "/NFT_Build.framework.js",
-        codeUrl: buildUrl + "/NFT_Build.wasm",
+        dataUrl: buildUrl + "/WebGlBuild.data",
+        frameworkUrl: buildUrl + "/WebGlBuild.framework.js",
+        codeUrl: buildUrl + "/WebGlBuild.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "BBD",
         productName: "Casino",
@@ -43,19 +43,6 @@
       const progressBarFull = document.querySelector("#unity-progress-bar-full");
       const fullscreenButton = document.querySelector("#unity-fullscreen-button");
       const spinner = document.querySelector('.spinner');
-
-      // Function to request fullscreen
-      function requestFullscreen() {
-        if (canvas.requestFullscreen) {
-          canvas.requestFullscreen();
-        } else if (canvas.webkitRequestFullscreen) {
-          canvas.webkitRequestFullscreen(); // Safari
-        } else if (canvas.mozRequestFullScreen) {
-          canvas.mozRequestFullScreen();
-        } else if (canvas.msRequestFullscreen) {
-          canvas.msRequestFullscreen();
-        }
-      }
 
       const canFullscreen = (function() {
         for (const key of [
@@ -95,23 +82,13 @@
               unityInstance.SetFullscreen(1);
             };
           }
-
-          // Automatically request fullscreen for iPhone users
-          if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            requestFullscreen();
-          }
         }).catch((message) => {
           alert(message);
         });
       };
       document.body.appendChild(script);
 
-      // Resize canvas dynamically
       window.addEventListener("resize", function() {
-        canvas.style.width = window.innerWidth + "px";
-        canvas.style.height = window.innerHeight + "px";
-
-        // Orientation check
         if (window.innerHeight > window.innerWidth) {
           alert("Please rotate your device to landscape mode.");
         }
